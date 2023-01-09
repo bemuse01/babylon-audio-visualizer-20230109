@@ -17,7 +17,7 @@ export default class{
     // create
     create(){
         this.engine = new BABYLON.Engine(this.canvas, true, {preserveDrawingBuffer: true, stencil: true})
-
+        
         // this.camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, new BABYLON.Vector3.Zero(), this.scene)
         // this.camera.setTarget(BABYLON.Vector3.Zero())
         // this.camera.attachControl(canvas, true)
