@@ -58,9 +58,9 @@ export default class{
         this.vw = Method.getVisibleWidth(this.camera, this.aspect, 0)
         this.vh = Method.getVisibleHeight(this.camera, 0)
 
-        this.rtt = new BABYLON.RenderTargetTexture(Method.uuidv4(), {width: this.rw, height: this.rh}, this.scene)
-        this.rtt.samples = this.rttSamples
-        this.scene.customRenderTargets.push(this.rtt)
+        // this.rtt = new BABYLON.RenderTargetTexture(Method.uuidv4(), {width: this.rw, height: this.rh}, this.scene)
+        // this.rtt.samples = this.rttSamples
+        // this.scene.customRenderTargets.push(this.rtt)
     }
     createObject(){
         for(const param of this.params){
@@ -79,6 +79,10 @@ export default class{
         }
     }
     createPostProcess(){
+        this.createGlow()
+    }
+    createGlow(){
+        this.glow = new BABYLON.GlowLayer('glow', this.scene)
     }
 
 

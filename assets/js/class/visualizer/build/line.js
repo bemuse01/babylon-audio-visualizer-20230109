@@ -14,9 +14,10 @@ export default class{
         this.camera = camera
         this.audio = audio
 
+        this.color = BABYLON.Color3.FromHexString('#00ffe4')
         this.radius = 25
         this.splineSmooth = 0.2
-        this.audioBoost = 15
+        this.audioBoost = 12
         this.audioStep = 100
         this.maxAudioLength = 60
         this.xs = Array.from({length: this.maxAudioLength}, (_, i) => i * 1)
@@ -40,7 +41,7 @@ export default class{
             },
             {
                 count: 18,
-                boost: 0.5,
+                boost: 0.35,
             }
         ]
 
@@ -106,20 +107,25 @@ export default class{
         }
     }
     createMaterial(){
-        const shaderName = GetShaderName()
+        // const shaderName = GetShaderName()
 
-        const material = new BABYLON.ShaderMaterial('material', this.scene,
-            {
-                vertex: shaderName,
-                fragment: shaderName
-            },
-            {
-                attributes: ['position', 'uv', 'audio'],
-                uniforms: ['worldViewProjection', 'viewProjection'],
-                needAlphaBlending: true,
-                needAlphaTesting: true,
-            }
-        )
+        // const material = new BABYLON.ShaderMaterial('material', this.scene,
+        //     {
+        //         vertex: shaderName,
+        //         fragment: shaderName
+        //     },
+        //     {
+        //         attributes: ['position', 'uv', 'audio'],
+        //         uniforms: ['worldViewProjection', 'viewProjection', 'uColor'],
+        //         needAlphaBlending: true,
+        //         needAlphaTesting: true,
+        //     }
+        // )
+        const material = new BABYLON.StandardMaterial('material', this.scene)
+        material.emissiveColor = BABYLON.Color3.FromHexString('#ffffff')
+        material.disableLighting = true
+
+        // material.setColor3('uColor', this.color)
 
         return material
     }
@@ -182,7 +188,7 @@ export default class{
         
         // const hats = ats.slice(0, ats.length / 2)
         const avg = (ats.reduce((p, c) => p + c) / len) * 0.9
-        const temp = ats.map((e, i) => Math.max(0, e - avg) * this.audioBoost * (i % 2 === 0 ? 1 : -1))
+        const temp = ats.map((e, i) => Math.max(0, e - avg) * this.audioBoost * (i % 2 === 0 ? 0.9 : -1.3))
 
         // const reverse = [...temp]
         // reverse.reverse()
