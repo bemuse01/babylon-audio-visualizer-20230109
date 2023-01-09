@@ -49,7 +49,8 @@ export default class{
     }
     createRenderObject(){
         this.scene = new BABYLON.Scene(this.engine)
-        this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0)
+        this.scene.autoClear = false
+        // this.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0)
 
         this.camera = new BABYLON.FreeCamera(this.cameraName, this.cameraPos, this.scene)
         this.camera.setTarget(BABYLON.Vector3.Zero())
@@ -79,7 +80,7 @@ export default class{
         }
     }
     createPostProcess(){
-        // this.createGlow()
+        this.createGlow()
     }
     createGlow(){
         this.glow = new BABYLON.GlowLayer('glow', this.scene)
@@ -89,6 +90,7 @@ export default class{
     // render
     render(){
         this.engine.runRenderLoop(() => {
+            this.engine.clear(true, true, false)
             this.renderScene()
             this.animateComps()
         })
