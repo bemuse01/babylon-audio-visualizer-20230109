@@ -1,5 +1,6 @@
 import Line from '../../objects/line.js'
 import Spline from '../../../lib/cubic-spline.js'
+import Plane from '../../objects/plane.js'
 import GetShaderName from '../shader/line.shader.js'
 
 export default class{
@@ -122,8 +123,8 @@ export default class{
         //     }
         // )
         const material = new BABYLON.StandardMaterial('material', this.scene)
-        material.emissiveColor = BABYLON.Color3.FromHexString('#ffffff')
-        material.disableLighting = true
+        material.emissiveColor = this.color
+        // material.disableLighting = true
 
         // material.setColor3('uColor', this.color)
 
