@@ -1,13 +1,9 @@
 export default class{
     constructor(src){
-        this.param = {
-            fft: 2 ** 14,
-            // smoothingTimeConstant: 0.65,
-            // smoothingTimeConstant: 0.01,
-            smoothingTimeConstant: 0.5,
-            src
-        }
+        this.src =src
 
+        this.fftSize = 2 ** 14
+        this.smoothingTimeConstant = 0
         this.canPlay = false
         this.nowPlaying = false
         this.sample = null
@@ -35,7 +31,7 @@ export default class{
     createAudio(){
         this.audio = new Audio()
         this.audio.loop = true
-        this.audio.src = this.param.src
+        this.audio.src = this.src
         this.audio.volume = 1
 
         this.audio.addEventListener('canplaythrough', () => {
@@ -54,8 +50,8 @@ export default class{
         this.analyser = this.context.createAnalyser()
         source.connect(this.analyser)
         this.analyser.connect(this.context.destination)
-        this.analyser.fftSize = this.param.fft
-        this.analyser.smoothingTimeConstant = this.param.smoothingTimeConstant
+        this.analyser.fftSize = this.fftSize
+        this.analyser.smoothingTimeConstant = this.smoothingTimeConstant
 
         const bufferLength = this.analyser.frequencyBinCount
         

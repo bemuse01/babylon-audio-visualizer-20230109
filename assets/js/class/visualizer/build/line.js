@@ -16,23 +16,22 @@ export default class{
         this.camera = camera
         this.audio = audio
 
-        this.color = BABYLON.Color3.FromHexString('#00ffe4')
+        this.count = 120
         this.radius = 25
-        this.splineSmooth = 0.5
+        this.color = BABYLON.Color3.FromHexString('#00ffe4')
+        this.splineSmooth = 0.6
+        this.audioDataLen = this.audio.fftSize / 2
         this.audioBoost = 25
-        this.audioStep = 60
+        // this.audioStep = 60
+        this.audioStep = ~~(this.audioDataLen / this.count)
         this.audioIndexOffset = 0
-        this.maxAudioLength = 120
-        this.xs = Array.from({length: this.maxAudioLength}, (_, i) => i * 1)
-        // this.random = Method.shuffle(Array.from({length: this.maxAudioLength}, (_, i) => i))
+        this.xs = Array.from({length: this.count}, (_, i) => i * 1)
         this.lines = []
         this.params = [
             {
-                count: 120,
                 boost: 1,
             },
             {
-                count: 120,
                 boost: -1,
             },
         ]
@@ -51,8 +50,8 @@ export default class{
     create(){
         const {scene, engine} = this
 
-        this.params.forEach(param => {
-            const {points, audio} = this.createAttribute(param)
+        this.params.forEach(_ => {
+            const {points, audio} = this.createAttribute()
 
             const material = this.createMaterial()
 
@@ -72,9 +71,8 @@ export default class{
             this.lines.push(line)
         })
     }
-    createAttribute(param){
-        const {radius} = this
-        const {count} = param
+    createAttribute(){
+        const {radius, count} = this
         const points = []
         const audio = []
 
@@ -128,7 +126,7 @@ export default class{
         this.render()
     }
     render(){
-        const {radius, params} = this
+        const {radius, params, audioBoost, count} = this
         const {audioData} = this.audio
 
         if(!audioData) return
@@ -137,7 +135,7 @@ export default class{
         const splinedData = this.createSplinedAudioData(stepData)
 
         this.lines.forEach((line, idx) => {
-            const {count, boost} = params[idx]
+            const {boost} = params[idx]
             const position = line.getVerticesData('position')
             const len = position.length / 3
 
@@ -146,8 +144,7 @@ export default class{
             for(let i = 0; i < len; i++){
                 const index = i * 3
                 const deg = degree * i * RADIAN
-                const rad = radius + splinedData[i] * boost
-                // const rad = radius + splinedData[this.random[i]] * boost
+                const rad = radius + splinedData[i] * boost * audioBoost
 
                 const x = Math.cos(deg) * rad
                 const y = Math.sin(deg) * rad
@@ -163,7 +160,7 @@ export default class{
         })
     }
     createStepAudioData(audioData){
-        return Array.from({length: this.maxAudioLength}, (_, i) => audioData[this.audioIndexOffset + i * this.audioStep] / 255)
+        return Array.from({length: this.count}, (_, i) => audioData[this.audioIndexOffset + i * this.audioStep] / 255)
     }
     createSplinedAudioData(audioData){
         const len = audioData.length
@@ -181,7 +178,7 @@ export default class{
         
         // const hats = ats.slice(0, ats.length / 2)
         const avg = (ats.reduce((p, c) => p + c) / len) * 0.9
-        const temp = ats.map((e, i) => Math.max(0, e - avg) * this.audioBoost)
+        const temp = ats.map((e, i) => Math.max(0, e - avg))
 
         // const reverse = [...temp]
         // reverse.reverse()
