@@ -46,9 +46,6 @@ export default class{
             engine
         })
 
-        // const position = this.line.getVerticesData('position')
-        // console.log(position)
-
         this.line.setMaterial(material)
     }
     createAttribute(){
@@ -110,8 +107,6 @@ export default class{
             }
 
         }
-
-        // console.log(position)
 
         this.line.updateVerticesData('position', position)
     }
