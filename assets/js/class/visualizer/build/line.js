@@ -2,6 +2,7 @@ import Line from '../../objects/line.js'
 import Spline from '../../../lib/cubic-spline.js'
 import Plane from '../../objects/plane.js'
 import GetShaderName from '../shader/line.shader.js'
+import Method from '../../../method/method.js'
 
 export default class{
     constructor({
@@ -17,19 +18,21 @@ export default class{
 
         this.color = BABYLON.Color3.FromHexString('#00ffe4')
         this.radius = 25
-        this.splineSmooth = 0.75
+        this.splineSmooth = 0.8
         this.audioBoost = 25
-        this.audioStep = 100
-        this.maxAudioLength = 60
+        this.audioStep = 60
+        this.audioIndexOffset = 0
+        this.maxAudioLength = 120
         this.xs = Array.from({length: this.maxAudioLength}, (_, i) => i * 1)
+        // this.random = Method.shuffle(Array.from({length: this.maxAudioLength}, (_, i) => i))
         this.lines = []
         this.params = [
             {
-                count: 60,
+                count: 120,
                 boost: 1,
             },
             {
-                count: 60,
+                count: 120,
                 boost: -1,
             },
         ]
@@ -144,6 +147,7 @@ export default class{
                 const index = i * 3
                 const deg = degree * i * RADIAN
                 const rad = radius + splinedData[i] * boost
+                // const rad = radius + splinedData[this.random[i]] * boost
 
                 const x = Math.cos(deg) * rad
                 const y = Math.sin(deg) * rad
@@ -159,7 +163,7 @@ export default class{
         })
     }
     createStepAudioData(audioData){
-        return Array.from({length: this.maxAudioLength}, (_, i) => audioData[i * this.audioStep] / 255)
+        return Array.from({length: this.maxAudioLength}, (_, i) => audioData[this.audioIndexOffset + i * this.audioStep] / 255)
     }
     createSplinedAudioData(audioData){
         const len = audioData.length

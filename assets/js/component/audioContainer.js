@@ -10,7 +10,8 @@ export default {
 
         // variables
         // const src = 'assets/src/結束バンド - あのバンド.mp3'
-        const src = 'assets/src/結束バンド - Rockn Roll Morning Light Falls on You.mp3'
+        // const src = 'assets/src/結束バンド - Rockn Roll Morning Light Falls on You.mp3'
+        const src = 'assets/src/boku ga shinou to omotta nowa.mp3'
         const store = useStore()
         const audio = computed(() => store.getters['audio/getAudio'])
 

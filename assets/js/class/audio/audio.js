@@ -4,7 +4,7 @@ export default class{
             fft: 2 ** 14,
             // smoothingTimeConstant: 0.65,
             // smoothingTimeConstant: 0.01,
-            smoothingTimeConstant: 0.4,
+            smoothingTimeConstant: 0.5,
             src
         }
 
@@ -48,6 +48,12 @@ export default class{
         console.log('created')
 
         this.context = new AudioContext()
+
+        const lowPassFilter = this.context.createBiquadFilter()
+        // lowPassFilter.type = 'lowpass'
+        // // Set the cutoff frequency of the filter (hz)
+        // lowPassFilter.frequency.value = 1000
+        // lowPassFilter.connect(this.context.destination)
         
         const source = this.context.createMediaElementSource(this.audio)
         
