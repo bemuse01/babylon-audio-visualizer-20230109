@@ -83,7 +83,14 @@ export default class{
         this.createGlow()
     }
     createGlow(){
-        this.glow = new BABYLON.GlowLayer('glow', this.scene)
+        this.glow = new BABYLON.GlowLayer('glow', this.scene, 
+            {
+                // mainTextureRatio: 1,
+                mainTextureSamples: 4,
+                // mainTextureFixedSize: 512,
+                // blurKernelSize: 44,
+            }
+        )
     }
 
 
