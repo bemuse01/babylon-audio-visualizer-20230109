@@ -49,12 +49,6 @@ export default class{
 
         this.context = new AudioContext()
 
-        const lowPassFilter = this.context.createBiquadFilter()
-        // lowPassFilter.type = 'lowpass'
-        // // Set the cutoff frequency of the filter (hz)
-        // lowPassFilter.frequency.value = 1000
-        // lowPassFilter.connect(this.context.destination)
-        
         const source = this.context.createMediaElementSource(this.audio)
         
         this.analyser = this.context.createAnalyser()
@@ -66,6 +60,12 @@ export default class{
         const bufferLength = this.analyser.frequencyBinCount
         
         this.audioData = new Uint8Array(bufferLength)
+
+        // const lowPassFilter = this.context .createBiquadFilter()
+        // lowPassFilter.type = 'lowpass'
+        // lowPassFilter.frequency.setValueAtTime(100, this.context.currentTime)
+        // source.connect(lowPassFilter)
+        // lowPassFilter.connect(this.context.destination)
     }
 
 

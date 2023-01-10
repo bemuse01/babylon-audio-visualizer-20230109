@@ -18,7 +18,7 @@ export default class{
 
         this.color = BABYLON.Color3.FromHexString('#00ffe4')
         this.radius = 25
-        this.splineSmooth = 0.8
+        this.splineSmooth = 0.5
         this.audioBoost = 25
         this.audioStep = 60
         this.audioIndexOffset = 0
