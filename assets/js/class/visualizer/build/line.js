@@ -24,7 +24,6 @@ export default class{
         this.audioBoost = 25
         // this.audioStep = 60
         this.audioStep = ~~(this.audioDataLen / this.count)
-        this.audioIndexOffset = 0
         this.xs = Array.from({length: this.count}, (_, i) => i * 1)
         this.lines = []
         this.params = [
@@ -160,7 +159,7 @@ export default class{
         })
     }
     createStepAudioData(audioData){
-        return Array.from({length: this.count}, (_, i) => audioData[this.audioIndexOffset + i * this.audioStep] / 255)
+        return Array.from({length: this.count}, (_, i) => audioData[i * this.audioStep] / 255)
     }
     createSplinedAudioData(audioData){
         const len = audioData.length
@@ -177,7 +176,7 @@ export default class{
         }
         
         // const hats = ats.slice(0, ats.length / 2)
-        const avg = (ats.reduce((p, c) => p + c) / len) * 0.9
+        const avg = (ats.reduce((p, c) => p + c) / len) * 1.0
         const temp = ats.map((e, i) => Math.max(0, e - avg))
 
         // const reverse = [...temp]

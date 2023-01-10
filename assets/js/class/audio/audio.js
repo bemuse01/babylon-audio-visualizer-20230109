@@ -3,7 +3,7 @@ export default class{
         this.src =src
 
         this.fftSize = 2 ** 14
-        this.smoothingTimeConstant = 0
+        this.smoothingTimeConstant = 0.4
         this.canPlay = false
         this.nowPlaying = false
         this.sample = null
