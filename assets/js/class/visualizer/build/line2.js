@@ -72,6 +72,7 @@ export default class{
     createMaterial(){
         const material = new BABYLON.StandardMaterial('material', this.scene)
         material.emissiveColor = this.color
+        material.alpha = 0.5
 
         return material
     }

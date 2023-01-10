@@ -22,11 +22,14 @@ export default class{
         this.splineSmooth = 0.7
         this.xs = Array.from({length: this.count}, (_, i) => i * 1)
         this.audioData = null
-        this.audioDataLen = this.audio.fftSize / 2
+        this.audioOffset = 1000
+        this.audioDataLen = this.audio.fftSize / 2 - this.audioOffset
         this.audioStep = ~~(this.audioDataLen / this.count)
 
+        console.log(this.audioStep)
+
         const radius = 25
-        const color = BABYLON.Color3.FromHexString('#72ffe9')
+        const color = BABYLON.Color3.FromHexString('#84ffec')
         const audioBoost = 25
 
         this.params = [
@@ -149,7 +152,7 @@ export default class{
         this.audioData = this.createSplinedAudioData(stepData)
     }
     createStepAudioData(audioData){
-        return Array.from({length: this.count}, (_, i) => audioData[i * this.audioStep] / 255)
+        return Array.from({length: this.count}, (_, i) => audioData[this.audioOffset / 2 + i * this.audioStep] / 255)
     }
     createSplinedAudioData(audioData){
         const len = audioData.length
