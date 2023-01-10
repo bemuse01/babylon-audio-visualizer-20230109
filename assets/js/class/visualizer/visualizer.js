@@ -88,9 +88,19 @@ export default class{
                 // mainTextureRatio: 1,
                 mainTextureSamples: 4,
                 // mainTextureFixedSize: 512,
-                // blurKernelSize: 44,
+                // blurKernelSize: 64,
             }
         )
+        // this.glow.intensity = 0.6
+        // this.glow2 = new BABYLON.GlowLayer('glow2', this.scene, 
+        //     {
+        //         // mainTextureRatio: 1,
+        //         mainTextureSamples: 8,
+        //         mainTextureFixedSize: 1024,
+        //         blurKernelSize: 16,
+        //     }
+        // )
+        // this.glow2.intensity = 0.6
     }
 
 
