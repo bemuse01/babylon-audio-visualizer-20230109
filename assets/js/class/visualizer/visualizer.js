@@ -1,6 +1,8 @@
 import Method from '../../method/method.js'
+import Spline from '../../lib/cubic-spline.js'
 
 import Line from './build/line.js'
+import Line2 from './build/line2.js' 
 
 export default class{
     constructor({app, audio}){
@@ -15,15 +17,32 @@ export default class{
         this.rh = this.engine.getRenderHeight()
         this.vw = null
         this.vh = null
-        this.rttSamples = 2 ** 3
         
-        const color1 = BABYLON.Color3.FromHexString('#4dfff9')
-        const color2 = BABYLON.Color3.FromHexString('#4d33ea')
-        const scale = 0.85
+        this.count = 120
+        this.splineSmooth = 0.7
+        this.xs = Array.from({length: this.count}, (_, i) => i * 1)
+        this.audioData = null
+        this.audioDataLen = this.audio.fftSize / 2
+        this.audioStep = ~~(this.audioDataLen / this.count)
+
+        const radius = 25
+        const color = BABYLON.Color3.FromHexString('#72ffe9')
+        const audioBoost = 25
 
         this.params = [
             {
-                module: Line
+                module: Line,
+                count: this.count,
+                radius,
+                color,
+                audioBoost
+            },
+            {
+                module: Line2,
+                count: this.count,
+                radius,
+                color,
+                audioBoost
             }
         ]
         this.comps = []
@@ -72,7 +91,7 @@ export default class{
                     scene: this.scene, 
                     engine: this.engine, 
                     audio: this.audio, 
-                    camera: this.camera, 
+                    camera: this.camera,
                     // rtt: this.rtt,
                     ...param
                 })
@@ -109,6 +128,7 @@ export default class{
         this.engine.runRenderLoop(() => {
             this.engine.clear(true, true, false)
             this.renderScene()
+            this.updateAudioData()
             this.animateComps()
         })
     }
@@ -117,8 +137,43 @@ export default class{
     }
     animateComps(){
         this.comps.forEach(comp => {
-            if(comp.animate) comp.animate()
+            if(comp.animate) comp.animate(this.audioData)
         })
+    }
+    updateAudioData(){
+        const {audioData} = this.audio
+
+        if(!audioData) return
+
+        const stepData = this.createStepAudioData(audioData)
+        this.audioData = this.createSplinedAudioData(stepData)
+    }
+    createStepAudioData(audioData){
+        return Array.from({length: this.count}, (_, i) => audioData[i * this.audioStep] / 255)
+    }
+    createSplinedAudioData(audioData){
+        const len = audioData.length
+        const ats = []
+
+        const xs = this.xs
+        const ys = audioData
+        // ys[0] = 0
+
+        const spline = new Spline(xs, ys)
+        
+        for(let i = 0; i < len; i++){
+            ats.push(spline.at(i * this.splineSmooth))
+        }
+        
+        // const hats = ats.slice(0, ats.length / 2)
+        const avg = (ats.reduce((p, c) => p + c) / len) * 1.0
+        const temp = ats.map((e, i) => Math.max(0, e - avg))
+
+        // const reverse = [...temp]
+        // reverse.reverse()
+
+        // return [...temp, ...reverse]
+        return temp
     }
 
 
