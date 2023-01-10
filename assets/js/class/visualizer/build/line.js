@@ -18,7 +18,7 @@ export default class{
 
         this.count = 120
         this.radius = 25
-        this.color = BABYLON.Color3.FromHexString('#00ffe4')
+        this.color = BABYLON.Color3.FromHexString('#66ffe8')
         this.splineSmooth = 0.7
         this.audioDataLen = this.audio.fftSize / 2
         this.audioBoost = 25
