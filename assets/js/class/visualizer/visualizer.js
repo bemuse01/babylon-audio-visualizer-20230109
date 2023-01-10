@@ -73,7 +73,7 @@ export default class{
                     engine: this.engine, 
                     audio: this.audio, 
                     camera: this.camera, 
-                    rtt: this.rtt,
+                    // rtt: this.rtt,
                     ...param
                 })
             )

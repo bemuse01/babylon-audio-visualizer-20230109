@@ -3,7 +3,8 @@ export default class{
         this.param = {
             fft: 2 ** 14,
             // smoothingTimeConstant: 0.65,
-            smoothingTimeConstant: 0.01,
+            // smoothingTimeConstant: 0.01,
+            smoothingTimeConstant: 0.4,
             src
         }
 
@@ -55,7 +56,7 @@ export default class{
         this.analyser.connect(this.context.destination)
         this.analyser.fftSize = this.param.fft
         this.analyser.smoothingTimeConstant = this.param.smoothingTimeConstant
-        
+
         const bufferLength = this.analyser.frequencyBinCount
         
         this.audioData = new Uint8Array(bufferLength)

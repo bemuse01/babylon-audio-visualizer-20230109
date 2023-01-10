@@ -17,8 +17,8 @@ export default class{
 
         this.color = BABYLON.Color3.FromHexString('#00ffe4')
         this.radius = 25
-        this.splineSmooth = 0.2
-        this.audioBoost = 12
+        this.splineSmooth = 0.75
+        this.audioBoost = 25
         this.audioStep = 100
         this.maxAudioLength = 60
         this.xs = Array.from({length: this.maxAudioLength}, (_, i) => i * 1)
@@ -26,24 +26,12 @@ export default class{
         this.params = [
             {
                 count: 60,
-                boost: 1
+                boost: 1,
             },
             {
                 count: 60,
-                boost: 0.6
+                boost: -1,
             },
-            {
-                count: 60,
-                boost: 0.3,
-            },
-            {
-                count: 60,
-                boost: 0.1,
-            },
-            {
-                count: 18,
-                boost: 0.35,
-            }
         ]
 
         this.init()
@@ -189,7 +177,7 @@ export default class{
         
         // const hats = ats.slice(0, ats.length / 2)
         const avg = (ats.reduce((p, c) => p + c) / len) * 0.9
-        const temp = ats.map((e, i) => Math.max(0, e - avg) * this.audioBoost * (i % 2 === 0 ? 0.9 : -1.3))
+        const temp = ats.map((e, i) => Math.max(0, e - avg) * this.audioBoost)
 
         // const reverse = [...temp]
         // reverse.reverse()
