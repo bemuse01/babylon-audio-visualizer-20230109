@@ -110,6 +110,9 @@ export default class{
         // )
         const material = new BABYLON.StandardMaterial('material', this.scene)
         material.emissiveColor = this.color
+        material.alpha = 0.5
+        material.alphaMode = BABYLON.Engine.ALPHA_ADD
+
         // material.disableLighting = true
 
         // material.setColor3('uColor', this.color)

@@ -2,7 +2,8 @@ import Method from '../../method/method.js'
 import Spline from '../../lib/cubic-spline.js'
 
 import Line from './build/line.js'
-import Line2 from './build/line2.js' 
+import Line2 from './build/line2.js'
+import Particle from './build/particle.js'
 
 export default class{
     constructor({app, audio}){
@@ -45,6 +46,13 @@ export default class{
             },
             {
                 module: Line2,
+                count: this.count,
+                radius,
+                color,
+                audioBoost
+            },
+            {
+                module: Particle,
                 count: this.count,
                 radius,
                 color,
@@ -111,7 +119,7 @@ export default class{
         this.glow = new BABYLON.GlowLayer('glow', this.scene, 
             {
                 // mainTextureRatio: 1,
-                // mainTextureSamples: 2,
+                mainTextureSamples: 2,
                 // mainTextureFixedSize: 512,
                 // blurKernelSize: 64,
             }
