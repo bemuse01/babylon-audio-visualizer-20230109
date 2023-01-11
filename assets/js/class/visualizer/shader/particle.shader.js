@@ -10,18 +10,22 @@ const getShaderName = () => {
 
         uniform mat4 worldViewProjection;
 
+        varying vec2 vUv;
+
         void main(){
-            vec3 nPosition = position;
+            gl_Position = worldViewProjection * vec4(position, 1.0);
 
-            nPosition.xy += audio;
-
-            gl_Position = worldViewProjection * vec4(nPosition, 1.0);
+            vUv = uv;
         }
     `
     const fragment = `
         uniform vec3 uColor;    
 
+        varying vec2 vUv;
+
         void main(){
+            // float opacity = distance(vUv, vec2(0.5)) * 2.0;
+
             gl_FragColor = vec4(uColor, 1.0);
         }
     `

@@ -77,8 +77,8 @@ export default class{
     // create
     create(){
         this.createRenderObject()
-        this.createObject()
         this.createPostProcess()
+        this.createObject()
     }
     createRenderObject(){
         this.scene = new BABYLON.Scene(this.engine)

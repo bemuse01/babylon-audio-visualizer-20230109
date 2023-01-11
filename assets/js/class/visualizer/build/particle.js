@@ -1,4 +1,5 @@
 import Particle from '../../objects/particle.js'
+import GetShaderName from '../shader/particle.shader.js'
 
 export default class{
     constructor({
@@ -19,8 +20,8 @@ export default class{
         this.audioBoost = audioBoost
 
         this.iter = 2
-        this.size = 0.15
-        this.tessellation = 6
+        this.size = 0.125
+        this.tessellation = 12
         this.audioData = null
         this.direction = [1, -1]
 
@@ -54,10 +55,28 @@ export default class{
         this.setPosition()
     }
     createMaterial(){
+        // const shaderName = GetShaderName()
+
+        // const material = new BABYLON.ShaderMaterial('material', this.scene,
+        //     {
+        //         vertex: shaderName,
+        //         fragment: shaderName
+        //     },
+        //     {
+        //         attributes: ['position', 'uv'],
+        //         uniforms: ['worldViewProjection', 'uColor'],
+        //         needAlphaBlending: true,
+        //         needAlphaTesting: true,
+        //     }
+        // )
+
+        // material.setColor3('uColor', this.color)
+
         const material = new BABYLON.StandardMaterial('material', this.scene)
         material.emissiveColor = this.color
         // material.alpha = 0.5
-        // material.alphaMode = BABYLON.Engine.ALPHA_ADD
+        material.alphaMode = BABYLON.Engine.ALPHA_ADD
+
         return material
     }
     

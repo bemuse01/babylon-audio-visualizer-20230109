@@ -1,8 +1,4 @@
 import Line from '../../objects/line.js'
-import Spline from '../../../lib/cubic-spline.js'
-import Plane from '../../objects/plane.js'
-import GetShaderName from '../shader/line.shader.js'
-import Method from '../../../method/method.js'
 
 export default class{
     constructor({
