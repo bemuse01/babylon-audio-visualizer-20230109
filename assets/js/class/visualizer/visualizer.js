@@ -20,13 +20,16 @@ export default class{
         this.vh = null
         
         this.count = 120
-        this.splineSmooth = 0.7
+        this.splineSmooth = 0.6
+        this.spilneAvgBoost = 1.15
         this.xs = Array.from({length: this.count}, (_, i) => i * 1)
         this.audioData = null
+        this.prevAudioData = Array.from({length: this.count}, _ => 0)
         this.audioOffset = ~~(this.audio.fftSize / 2 * 0.3)
-        // this.audioOffset = 0
         this.audioDataLen = this.audio.fftSize / 2 - this.audioOffset
         this.audioStep = ~~(this.audioDataLen / this.count)
+        this.crtAudioRatio = 0.225
+        this.prevAudioRatio = 1 - this.crtAudioRatio
 
         console.log(this.audioOffset)
         console.log(this.audioDataLen)
@@ -34,7 +37,7 @@ export default class{
 
         const radius = 25
         const color = BABYLON.Color3.FromHexString('#84ffec')
-        const audioBoost = 25
+        const audioBoost = 35
 
         this.params = [
             {
@@ -161,6 +164,7 @@ export default class{
 
         const stepData = this.createStepAudioData(audioData)
         this.audioData = this.createSplinedAudioData(stepData)
+        this.createProcessedAudioData()
     }
     createStepAudioData(audioData){
         return Array.from({length: this.count}, (_, i) => audioData[~~(this.audioOffset / 2) + i * this.audioStep] / 255)
@@ -180,7 +184,7 @@ export default class{
         }
         
         // const hats = ats.slice(0, ats.length / 2)
-        const avg = (ats.reduce((p, c) => p + c) / len) * 1.0
+        const avg = (ats.reduce((p, c) => p + c) / len) * this.spilneAvgBoost
         const temp = ats.map((e, i) => Math.max(0, e - avg))
 
         // const reverse = [...temp]
@@ -189,6 +193,10 @@ export default class{
         // return [...temp, ...reverse]
         return temp
     }
+    createProcessedAudioData(){
+        this.audioData = this.prevAudioData.map((e, i) => this.audioData[i] * this.crtAudioRatio + e * this.prevAudioRatio)
+        this.prevAudioData = this.audioData
+    }    
 
 
     // resize
