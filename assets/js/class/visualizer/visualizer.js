@@ -38,7 +38,7 @@ export default class{
         console.log(this.audioStep)
 
         const radius = 25
-        const color = BABYLON.Color3.FromHexString('#84ffec')
+        const color = BABYLON.Color3.FromHexString('#66faff')
         const audioBoost = 35
 
         this.params = [
