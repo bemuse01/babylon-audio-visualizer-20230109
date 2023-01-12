@@ -3,6 +3,7 @@ import Spline from '../../lib/cubic-spline.js'
 
 import Line from './build/line.js'
 import Line2 from './build/line2.js'
+import Line3 from './build/line3.js'
 import Particle from './build/particle.js'
 
 export default class{
@@ -48,19 +49,19 @@ export default class{
                 audioBoost
             },
             {
-                module: Line2,
+                module: Line3,
                 count: this.count,
                 radius,
                 color,
                 audioBoost
             },
-            {
-                module: Particle,
-                count: this.count,
-                radius,
-                color,
-                audioBoost
-            }
+            // {
+            //     module: Particle,
+            //     count: this.count,
+            //     radius,
+            //     color,
+            //     audioBoost
+            // }
         ]
         this.comps = []
 

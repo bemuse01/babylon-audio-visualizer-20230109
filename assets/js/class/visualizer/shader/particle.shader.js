@@ -1,6 +1,6 @@
 // import ShaderMethod from '../../../method/method.shader.js'
 
-const name = 'visualizerLine'
+const name = 'visualizerParticle'
 
 const getShaderName = () => {
     const vertex = `
