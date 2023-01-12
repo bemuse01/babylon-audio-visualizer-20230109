@@ -47,7 +47,16 @@ export default class{
                 count: this.count,
                 radius,
                 color,
-                audioBoost
+                audioBoost,
+                direction: 1
+            },
+            {
+                module: Line,
+                count: this.count,
+                radius,
+                color,
+                audioBoost,
+                direction: -1
             },
             {
                 module: Line2,

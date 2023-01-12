@@ -8,7 +8,8 @@ export default class{
         audioBoost,
         count,
         radius,
-        color
+        color,
+        direction
     }){
         this.engine = engine
         this.scene = scene
@@ -22,11 +23,11 @@ export default class{
         this.lines = []
         this.params = [
             {
-                direction: 1,
+                direction,
             },
-            {
-                direction: -1,
-            },
+            // {
+            //     direction: -1,
+            // },
         ]
 
         this.init()
@@ -106,7 +107,8 @@ export default class{
         // )
         const material = new BABYLON.StandardMaterial('material', this.scene)
         material.emissiveColor = this.color
-        material.alpha = 0.75
+    	material.diffuseColor = new BABYLON.Color3.White()
+        material.alpha = 0.65
         material.alphaMode = BABYLON.Engine.ALPHA_ADD
 
         // material.disableLighting = true
