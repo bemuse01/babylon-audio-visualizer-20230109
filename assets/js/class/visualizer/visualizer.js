@@ -30,7 +30,7 @@ export default class{
         this.audioOffset = ~~(this.audio.fftSize / 2 * 0.3)
         this.audioDataLen = this.audio.fftSize / 2 - this.audioOffset
         this.audioStep = ~~(this.audioDataLen / this.count)
-        this.crtAudioRatio = 0.225
+        this.crtAudioRatio = 0.2
         this.prevAudioRatio = 1 - this.crtAudioRatio
 
         console.log(this.audioOffset)
