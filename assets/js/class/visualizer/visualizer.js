@@ -27,7 +27,7 @@ export default class{
         this.xs = Array.from({length: this.count}, (_, i) => i * 1)
         this.audioData = null
         this.prevAudioData = Array.from({length: this.count}, _ => 0)
-        this.audioOffset = ~~(this.audio.fftSize / 2 * 0.3)
+        this.audioOffset = ~~(this.audio.fftSize / 2 * 0.4)
         this.audioDataLen = this.audio.fftSize / 2 - this.audioOffset
         this.audioStep = ~~(this.audioDataLen / this.count)
         this.crtAudioRatio = 0.2
