@@ -7,6 +7,7 @@ import Line2 from './build/line2.js'
 // import Line4 from './build/line4.js'
 // import Particle from './build/particle.js'
 import Particle2 from './build/particle2.js'
+import Particle3 from './build/particle3.js'
 
 export default class{
     constructor({app, audio}){

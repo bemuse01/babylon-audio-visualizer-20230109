@@ -1,4 +1,4 @@
-import Particle from '../../objects/particle.js'
+import ParticleSystem from '../../objects/particleSystem.js'
 
 export default class{
     constructor({
@@ -17,7 +17,8 @@ export default class{
         this.color = color
 
         this.size = 2
-        this.tessellation = 3
+        this.countStep = 4
+        this.updateSpeed = 0.01
 
         this.init()
     }
@@ -31,6 +32,22 @@ export default class{
 
     // create
     create(){
-        
+        const {count, countStep, size, scene, engine, color, radius, updateSpeed} = this
+
+        const len = ~~(count / countStep)
+        const texture = new BABYLON.Texture('./assets/src/triangle.png', scene)
+
+        this.ps = new ParticleSystem({
+            capacity: len,
+            size: {minSize: size, maxSize: size},
+            lifeTime: {minLifeTime: 2, maxLifeTime: 2},
+            emitRate: len,
+            // emitPower: {minEmitPower: 1, maxEmitPower: 1},
+            updateSpeed,
+            texture,
+            scene,
+        })
+
+        this.ps.setEmitter('createCylinderEmitter', [radius, 0, 0, 0])
     }
 }
