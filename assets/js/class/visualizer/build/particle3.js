@@ -100,7 +100,7 @@ export default class{
     // load
     loadTexture(){
         return new Promise((resolve, reject) => {
-            const texture = new BABYLON.Texture(this.texturePath, this.scene)
+            const texture = new BABYLON.Texture(this.texturePath, this.scene, false, false, )
 
             texture.onLoadObservable.add(() => resolve(texture))
         })
