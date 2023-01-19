@@ -21,7 +21,7 @@ export default class{
         this.countStep = 2
         this.updateSpeed = 0.008
         this.texturePath = './assets/src/triangle.png'
-        this.alphaStep = [0, 0.5, 1, 1, 1, 0]
+        this.alphaStep = [0, 0.25, 1, 1, 0]
         this.moveDistRatio = 1.9
 
         this.init()
