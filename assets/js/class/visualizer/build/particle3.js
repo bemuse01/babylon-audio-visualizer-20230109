@@ -47,7 +47,7 @@ export default class{
         this.ps = new ParticleSystem({
             capacity: len,
             size: {minSize: size, maxSize: size},
-            lifeTime: {minLifeTime: 2, maxLifeTime: 2},
+            lifeTime: {minLifeTime: 1.75, maxLifeTime: 2},
             emitRate: ~~(len / 5),
             // emitPower: {minEmitPower: 1, maxEmitPower: 1},
             angularSpeed: {minAngularSpeed: 0.25, maxAngularSpeed: 0.5},

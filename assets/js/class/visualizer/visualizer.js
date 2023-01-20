@@ -69,7 +69,7 @@ export default class{
                 audioBoost
             },
             {
-                module: Particle2,
+                module: Particle4,
                 count: this.count,
                 radius,
                 color

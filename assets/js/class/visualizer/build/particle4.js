@@ -190,15 +190,15 @@ export default class{
             const animDone = item[3]
 
             if(animDone){
-                // this.data[idx2 + 0] = degree * (Math.random() * 360) * RADIAN
+                this.data[idx2 + 0] = degree * (Math.random() * 360) * RADIAN
                 this.data[idx2 + 2] = currentTime
             }
             
             circle.get().position.x = x
             circle.get().position.y = y
-            // circle.get().rotation.x += 0.01
-            // circle.get().rotation.y += 0.01
-            // circle.get().rotation.z += 0.01
+            circle.get().rotation.x += 0.01
+            circle.get().rotation.y += 0.01
+            circle.get().rotation.z += 0.01
             material.alpha = opacity
         }
     }
