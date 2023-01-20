@@ -41,6 +41,9 @@ div#wrap{
     height: 100vh;
     /* background: url('../src/bg.png') no-repeat center center / cover; */
 }
+canvas{
+    outline: none;
+}
 
 
 /* progress */
