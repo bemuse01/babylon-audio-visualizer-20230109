@@ -120,9 +120,9 @@ export default class{
 
         circle.get().position.x = x
         circle.get().position.y = y
-        circle.get().rotation.x += 0.005
-        circle.get().rotation.y += 0.005
-        circle.get().rotation.z += 0.005
+        // circle.get().rotation.x += 0.005
+        // circle.get().rotation.y += 0.005
+        // circle.get().rotation.z += 0.005
 
         material.alpha = opacity
     }

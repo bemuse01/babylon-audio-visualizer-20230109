@@ -8,6 +8,7 @@ import Line2 from './build/line2.js'
 // import Particle from './build/particle.js'
 import Particle2 from './build/particle2.js'
 import Particle3 from './build/particle3.js'
+import Particle4 from './build/particle4.js'
 
 export default class{
     constructor({app, audio}){
@@ -68,7 +69,7 @@ export default class{
                 audioBoost
             },
             {
-                module: Particle3,
+                module: Particle2,
                 count: this.count,
                 radius,
                 color
