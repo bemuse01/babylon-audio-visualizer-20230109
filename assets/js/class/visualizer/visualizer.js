@@ -148,6 +148,7 @@ export default class{
                 // blurKernelSize: 64,
             }
         )
+        console.log(this.engine.clear)
         // this.glow.intensity = 0.6
         // this.glow2 = new BABYLON.GlowLayer('glow2', this.scene, 
         //     {
@@ -165,6 +166,8 @@ export default class{
     render(){
         this.engine.runRenderLoop(() => {
             this.engine.clear(true, true, false)
+            // this.engine.clear(new BABYLON.Color4(0, 0, 0, 0.1), true, false)
+            
             this.renderScene()
             this.updateAudioData()
             this.animateComps()
