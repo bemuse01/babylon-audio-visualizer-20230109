@@ -25,7 +25,7 @@ export default class{
         this.positionStep = [1, 1.6]
         this.animDuration = 5000
         this.animeDelay = {base: 0, rand: 6000}
-        this.gpu = new GPU()
+        this.gpu = new GPU.GPU()
         this.data = this.createData()
 
         this.init()
